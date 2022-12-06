@@ -1,7 +1,6 @@
 import Data.List.Split (divvy)
 import Data.List (find, nub)
 import Data.Maybe (fromJust)
-import Text.PrettyPrint.HughesPJClass (first)
 
 main :: IO ()
 main = do
