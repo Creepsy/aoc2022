@@ -27,6 +27,7 @@ solvePart2 :: FileSystem -> Integer
 solvePart2 root = head . dropWhile (<spaceToFree) . sort . map getFileSystemSize . filterFileSystem isFolder $ root
     where rootSize = getFileSystemSize root
           spaceToFree = max 0 30000000 - (70000000 - rootSize)
+          
 fileSystemFromCommands :: [TerminalCommand] -> FileSystem
 fileSystemFromCommands = getFileSystem . top . foldl processCommand (newZipper rootFolder)
     where rootFolder = Folder "/" []
