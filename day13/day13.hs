@@ -4,7 +4,6 @@ import Text.Parsec (many1, many, char, digit, lookAhead, (<|>), (<?>), sepBy, sp
 import Data.Either (fromLeft, isLeft, fromRight)
 import Data.List (sort, elemIndex)
 import Data.Maybe (fromJust)
-import Debug.Trace (trace)
 
 data PacketElement = List [PacketElement] | Value Int deriving (Eq, Show)
 type Packet = [PacketElement]
@@ -30,8 +29,6 @@ main = do
         putStrLn $ "Part 1: " ++ show (solvePart1 packetPairs)
         putStrLn $ "Part 2: " ++ show (solvePart2 packets')
 
--- parsing
-
 solvePart1 :: [(Packet, Packet)] -> Int
 solvePart1 = sum . map fst . filter ((==True) . snd) . zip [1..] . map (uncurry (<=)) 
 
@@ -43,6 +40,8 @@ solvePart2 packets = divider2Index * divider6Index
           sortedPackets = sort packets'
           divider2Index = fromJust (dividerPacket2 `elemIndex` sortedPackets) + 1
           divider6Index = fromJust (dividerPacket6 `elemIndex` sortedPackets) + 1
+
+-- parsing
 
 parsePacket :: Parser Packet
 parsePacket = do
